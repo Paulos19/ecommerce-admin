@@ -1,16 +1,16 @@
-'use client'
+'use client';
 
-import { useEffect, useState } from "react"
-import { Button } from "@/components/ui/button"
-import { ImagePlus, Trash } from "lucide-react"
-import Image from "next/image"
-import { CldUploadWidget } from 'next-cloudinary'
+import { useEffect, useState } from "react";
+import { Button } from "@/components/ui/button";
+import { ImagePlus, Trash } from "lucide-react";
+import Image from "next/image";
+import { CldUploadWidget } from 'next-cloudinary';
 
 interface ImageUploadProps {
-    disabled?: boolean
-    onChange: (value: string[]) => void
-    onRemove: (value: string) => void
-    value: string[]
+    disabled?: boolean;
+    onChange: (value: string) => void; // Aceita uma única string
+    onRemove: () => void; // Remove a URL
+    value: string; // Uma única string
 }
 
 const ImageUpload: React.FC<ImageUploadProps> = ({
@@ -19,37 +19,36 @@ const ImageUpload: React.FC<ImageUploadProps> = ({
     onRemove,
     value
 }) => {
-
-    const [isMounted, setIsMounted] = useState(false)
+    const [isMounted, setIsMounted] = useState(false);
 
     useEffect(() => {
-        setIsMounted(true)
-    }, [])
+        setIsMounted(true);
+    }, []);
 
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const onUpload = (result: any) => {
         console.log("Upload Result:", result);
         if (result?.info?.secure_url) {
-            onChange(result.info.secure_url);
+            onChange(result.info.secure_url); // Passa uma única string
         }
     };
-    
+
     if (!isMounted) {
-        return null
+        return null;
     }
 
     return (
         <div>
             <div className="mb-4 flex items-center gap-4">
-                {value.map((url) => (
-                    <div key={url} className="relative w-[200px] h-[200px] rounded-md overflow-hidden">
+                {value && ( // Verifica se há uma URL
+                    <div className="relative w-[200px] h-[200px] rounded-md overflow-hidden">
                         <div className="z-10 absolute top-2 right-2">
                             <Button
                                 className="cursor-pointer"
                                 type="button"
-                                onClick={() => onRemove(url)}
+                                onClick={onRemove} // Chama onRemove sem argumentos
                                 variant="destructive"
-                                size="icon">
+                                size="icon"
+                            >
                                 <Trash className="h-4 w-4" />
                             </Button>
                         </div>
@@ -57,16 +56,16 @@ const ImageUpload: React.FC<ImageUploadProps> = ({
                             fill
                             className="object-cover"
                             alt="image"
-                            src={url}
+                            src={value} // Usa a única URL
                         />
                     </div>
-                ))}
+                )}
             </div>
             <CldUploadWidget onSuccess={onUpload} uploadPreset="q1jqucpt">
                 {({ open }) => {
                     const onClick = () => {
-                        open()
-                    }
+                        open();
+                    };
 
                     return (
                         <Button
@@ -76,14 +75,14 @@ const ImageUpload: React.FC<ImageUploadProps> = ({
                             variant="secondary"
                             onClick={onClick}
                         >
-                            <ImagePlus className="h-4 w-4 mr-2"/>
+                            <ImagePlus className="h-4 w-4 mr-2" />
                             Upload da Imagem
                         </Button>
-                    )
+                    );
                 }}
             </CldUploadWidget>
         </div>
-    )
-}
+    );
+};
 
-export default ImageUpload
+export default ImageUpload;
