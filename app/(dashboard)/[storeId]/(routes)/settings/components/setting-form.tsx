@@ -50,7 +50,7 @@ const SettingForm: React.FC<SettingFormProps> = ({
            await axios.patch(`/api/stores/${params.storeId}`, data)
            router.refresh()
            toast.success('Loja Atualizada')
-        } catch (error) {
+        } catch {
             toast.error('Algo deu errado...')
         } finally {
             setLoading(false)
@@ -64,7 +64,7 @@ const SettingForm: React.FC<SettingFormProps> = ({
             router.refresh()
             router.push('/')
             toast.success('Loja exluída com Sucesso')
-        } catch (error) {
+        } catch {
             toast.error('Tenha certeza de que removeu todos os produtos e categorias primeiro')
         } finally {
             setLoading(false)

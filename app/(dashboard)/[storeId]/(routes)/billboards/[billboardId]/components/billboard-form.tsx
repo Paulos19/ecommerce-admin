@@ -64,7 +64,7 @@ const BillBoardForm: React.FC<BillBoardProps> = ({
             router.refresh()
             router.push(`/${params.storeId}/billboards`)
             toast.success(toastMessage)
-        } catch (error) {
+        } catch {
             toast.error('Algo deu errado...')
         } finally {
             setLoading(false)
@@ -78,7 +78,7 @@ const BillBoardForm: React.FC<BillBoardProps> = ({
             router.refresh()
             router.push(`/${params.storeId}/billboards`)
             toast.success('Painel exluído com Sucesso')
-        } catch (error) {
+        } catch {
             toast.error('Tenha certeza de que removeu todos as categorias primeiro')
         } finally {
             setLoading(false)

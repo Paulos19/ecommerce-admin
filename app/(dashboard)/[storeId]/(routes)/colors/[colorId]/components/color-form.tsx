@@ -65,7 +65,7 @@ const ColorForm: React.FC<ColorProps> = ({
             router.refresh()
             router.push(`/${params.storeId}/colors`)
             toast.success(toastMessage)
-        } catch (error) {
+        } catch {
             toast.error('Algo deu errado...')
         } finally {
             setLoading(false)
@@ -79,7 +79,7 @@ const ColorForm: React.FC<ColorProps> = ({
             router.refresh()
             router.push(`/${params.storeId}/colors`)
             toast.success('Cor exluída com Sucesso')
-        } catch (error) {
+        } catch {
             toast.error('Tenha certeza de que removeu todos os produtos primeiro')
         } finally {
             setLoading(false)

@@ -89,7 +89,7 @@ const ProductForm: React.FC<ProductFormProps> = ({
             router.refresh()
             router.push(`/${params.storeId}/products`)
             toast.success(toastMessage)
-        } catch (error) {
+        } catch {
             toast.error('Algo deu errado...')
         } finally {
             setLoading(false)
@@ -103,7 +103,7 @@ const ProductForm: React.FC<ProductFormProps> = ({
             router.refresh()
             router.push(`/${params.storeId}/products`)
             toast.success('Produto exluído com Sucesso')
-        } catch (error) {
+        } catch {
             toast.error('Algo deu errado...')
         } finally {
             setLoading(false)

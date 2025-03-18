@@ -66,7 +66,7 @@ const CategoryForm: React.FC<CategoryFormProps> = ({
             router.refresh()
             router.push(`/${params.storeId}/categories`)
             toast.success(toastMessage)
-        } catch (error) {
+        } catch {
             toast.error('Algo deu errado...')
         } finally {
             setLoading(false)
@@ -80,7 +80,7 @@ const CategoryForm: React.FC<CategoryFormProps> = ({
             router.refresh()
             router.push(`/${params.storeId}/categories`)
             toast.success('Categoria exluída com Sucesso')
-        } catch (error) {
+        } catch {
             toast.error('Tenha certeza de que removeu todos os produtos dessa categoria')
         } finally {
             setLoading(false)

@@ -63,7 +63,7 @@ const SizeForm: React.FC<SizedProps> = ({
             router.refresh()
             router.push(`/${params.storeId}/sizes`)
             toast.success(toastMessage)
-        } catch (error) {
+        } catch {
             toast.error('Algo deu errado...')
         } finally {
             setLoading(false)
@@ -77,7 +77,7 @@ const SizeForm: React.FC<SizedProps> = ({
             router.refresh()
             router.push(`/${params.storeId}/sizes`)
             toast.success('Tamanho exluído com Sucesso')
-        } catch (error) {
+        } catch {
             toast.error('Tenha certeza de que removeu todos os produtos primeiro')
         } finally {
             setLoading(false)

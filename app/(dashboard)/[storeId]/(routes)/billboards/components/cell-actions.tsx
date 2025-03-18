@@ -35,7 +35,7 @@ const CellAction: React.FC<CellActionProps> = ({
             await axios.delete(`/api/${params.storeId}/billboards/${data.id}`)
             router.refresh()
             toast.success('Painel exluído com Sucesso')
-        } catch (error) {
+        } catch {
             toast.error('Tenha certeza de que removeu todos as categorias primeiro')
         } finally {
             setLoading(false)

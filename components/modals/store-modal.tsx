@@ -11,7 +11,6 @@ import { Button } from "@/components/ui/button"
 import { useState } from "react"
 import axios from 'axios'
 import toast from "react-hot-toast"
-import { error } from "console"
 
 const formSchema = z.object({
     name: z.string().min(1),
@@ -37,7 +36,7 @@ export const StoreModal = () => {
 
             window.location.assign(`/${response.data.id}`)
             
-        } catch (error) {
+        } catch {
             toast.error('Algo deu errado')
         } finally {
             setLoading(false)
