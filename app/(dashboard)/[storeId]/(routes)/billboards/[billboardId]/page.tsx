@@ -1,23 +1,18 @@
-
 import prismadb from '@/lib/prismadb'
 import React from 'react'
 import BillBoardForm from './components/billboard-form'
 
-interface BillboardPageProps {
-  params: { billboardId: string }
-}
+const BillboardPage = async ({
+    params
+}: {
+    params: { billboardId: string }
+}) => {
 
-const BillboardPage = async ({ params }: BillboardPageProps) => {
-  const billboard = await prismadb.billboard.findUnique({
-    where: {
-      id: params.billboardId,
-    },
-  })
-
-  if (!billboard) {
-    // Se o billboard não for encontrado, você pode retornar uma mensagem de erro ou redirecionar
-    return <div>Billboard not found</div>
-  }
+    const billboard = await prismadb.billboard.findUnique({
+        where: {
+            id: params.billboardId
+        }
+    })
 
   return (
     <div className='flex-col'>
