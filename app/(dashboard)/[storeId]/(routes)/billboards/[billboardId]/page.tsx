@@ -7,14 +7,12 @@ const BillboardPage = async ({
 }: {
   params: { billboardId: string }
 }) => {
-  // Buscando os dados da tabela 'billboard'
   const billboard = await prismadb.billboard.findUnique({
     where: {
       id: params.billboardId,
     },
   })
 
-  // Retorno do JSX
   return (
     <div className="flex-col">
       <div className="flex-1 space-y-4 p-8 pt-6">
