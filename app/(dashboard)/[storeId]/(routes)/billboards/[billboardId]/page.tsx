@@ -1,14 +1,24 @@
+
 import prismadb from '@/lib/prismadb'
 import React from 'react'
 import BillBoardForm from './components/billboard-form'
-import { Billboard } from '@prisma/client'
-import { GetServerSideProps } from 'next'
 
-type BillboardPageProps = {
-  billboard: Billboard | null  // Aqui você usa o tipo 'Billboard' gerado pelo Prisma
+interface BillboardPageProps {
+  params: { billboardId: string }
 }
 
-const BillboardPage = ({ billboard }: BillboardPageProps) => {
+const BillboardPage = async ({ params }: BillboardPageProps) => {
+  const billboard = await prismadb.billboard.findUnique({
+    where: {
+      id: params.billboardId,
+    },
+  })
+
+  if (!billboard) {
+    // Se o billboard não for encontrado, você pode retornar uma mensagem de erro ou redirecionar
+    return <div>Billboard not found</div>
+  }
+
   return (
     <div className='flex-col'>
       <div className='flex-1 space-y-4 p-8 pt-6'>
@@ -16,20 +26,6 @@ const BillboardPage = ({ billboard }: BillboardPageProps) => {
       </div>
     </div>
   )
-}
-
-export const getServerSideProps: GetServerSideProps = async ({ params }) => {
-  const billboard = await prismadb.billboard.findUnique({
-    where: {
-      id: params?.billboardId as string
-    }
-  })
-
-  return {
-    props: {
-      billboard
-    }
-  }
 }
 
 export default BillboardPage
