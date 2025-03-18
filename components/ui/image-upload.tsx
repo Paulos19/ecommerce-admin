@@ -25,6 +25,7 @@ const ImageUpload: React.FC<ImageUploadProps> = ({
         setIsMounted(true);
     }, []);
 
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const onUpload = (result: any) => {
         console.log("Upload Result:", result);
         if (result?.info?.secure_url) {
