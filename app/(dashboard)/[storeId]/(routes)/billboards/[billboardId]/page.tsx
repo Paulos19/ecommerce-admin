@@ -2,17 +2,20 @@ import prismadb from '@/lib/prismadb'
 import React from 'react'
 import BillBoardForm from './components/billboard-form'
 
-const BillboardPage = async ({
-    params
-}: {
-    params: { billboardId: string }
-}) => {
+interface Params {
+  billboardId: string;
+}
 
-    const billboard = await prismadb.billboard.findUnique({
-        where: {
-            id: params.billboardId
-        }
-    })
+const BillboardPage = async ({
+  params
+}: {
+  params: Params
+}) => {
+  const billboard = await prismadb.billboard.findUnique({
+    where: {
+      id: params.billboardId
+    }
+  })
 
   return (
     <div className='flex-col'>
