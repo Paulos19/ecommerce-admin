@@ -7,7 +7,8 @@ const BillboardPage = async ({
   params: { storeId: string; billboardId: string }
 }) => {
 
-  const { billboardId, storeId: _ } = params; // Acknowledge storeId without using it
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  const { billboardId, storeId } = params;
 
   const billboard = await prismadb.billboard.findUnique({
       where: {
