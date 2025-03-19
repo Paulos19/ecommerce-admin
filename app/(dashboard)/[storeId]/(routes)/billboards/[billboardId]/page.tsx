@@ -4,16 +4,16 @@ import BillBoardForm from "./components/billboard-form";
 const BillboardPage = async ({
   params
 }: {
-  params: { storeId?: string; billboardId: string }
+  params: { storeId: string; billboardId: string }
 }) => {
 
-  const { billboardId, storeId } = params || {}; // Safely destructure params
+  const { billboardId, storeId: _ } = params; // Acknowledge storeId without using it
 
-  const billboard = billboardId 
-      ? await prismadb.billboard.findUnique({
-          where: { id: billboardId }
-      })
-      : null; // Handle scenario where billboardId is missing
+  const billboard = await prismadb.billboard.findUnique({
+      where: {
+          id: billboardId
+      }
+  });
 
   return (
       <div className='flex-col'>
@@ -25,3 +25,4 @@ const BillboardPage = async ({
 };
 
 export default BillboardPage;
+
